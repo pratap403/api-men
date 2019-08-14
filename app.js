@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('express-handlebars');
 var expressSession = require('express-session');
+var mongoUtil = require('./model/mongoUtil');
 
 var routes = require('./routes/index');
 
@@ -26,6 +27,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false}));
 
 app.use('/', routes);
+
+// Database connection
+mongoUtil.connectToServer( function( err, client ) {
+  if (err) console.log(err);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
