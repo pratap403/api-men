@@ -31,6 +31,7 @@ app.use('/', routes);
 // Database connection
 mongoUtil.connectToServer( function( err, client ) {
   if (err) console.log(err);
+  else console.log("Mongodb Database Started");
 });
 
 // catch 404 and forward to error handler
